@@ -23,6 +23,7 @@ create table planet (
   hazard varchar(10) not null,
   sentinels varchar(25) not null,
   star_id integer references star(star_id)
+  user_id integer references users(user_id)
 );
 
 create table planet_image (

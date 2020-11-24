@@ -26,7 +26,6 @@ export const registerUser = (username, password) => {
     return axios.post("/api/auth/register", { username, password })
     .then(({ data }) => {
       dispatch(getUser(data));
-
     })
     .catch((err) => console.log(err));
   }

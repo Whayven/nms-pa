@@ -1,0 +1,1 @@
+select s.star_id, s.name, s.star_type, s.galaxy, u.username from star s join users u on s.user_id = u.user_id;

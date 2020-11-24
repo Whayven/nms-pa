@@ -3,6 +3,8 @@ const express = require("express");
 const session = require("express-session");
 const massive = require("massive");
 const userCtrl = require("./Controllers/userController");
+const starCtrl = require("./Controllers/starController");
+const planetCtrl = require("./Controllers/planetController");
 const { SERVER_PORT, CONNECTION_STRING, SESSION_SECRET } = process.env;
 const app = express();
 
@@ -29,6 +31,13 @@ app.get("/api/auth/refresh", userCtrl.getSession);
 app.post("/api/auth/login", userCtrl.login);
 app.post("/api/auth/logout", userCtrl.logout);
 app.post("/api/auth/register", userCtrl.register);
+
+app.get("/api/archive", starCtrl.getStars)
+app.get("/api/archive/me", starCtrl.getUserStars);
+app.get("/api/archive/:starid", starCtrl.getStar);
+app.get("/api/archive/:starid/planets", starCtrl.getStarPlanets);
+
+app.get("/api/archive/planets/:planetid", planetCtrl.getPlanetInfo);
 
 app.listen(SERVER_PORT, () => {
   console.log(`Server running on port ${SERVER_PORT}.`);
