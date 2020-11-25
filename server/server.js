@@ -6,6 +6,7 @@ const massive = require("massive");
 const userCtrl = require("./Controllers/userController");
 const starCtrl = require("./Controllers/starController");
 const planetCtrl = require("./Controllers/planetController");
+const path = require('path');
 const { SERVER_PORT, CONNECTION_STRING, SESSION_SECRET, S3_BUCKET, AWS_ACCESS_KEY_ID, AWS_SECRET_ACCESS_KEY } = process.env;
 const app = express();
 
@@ -27,6 +28,8 @@ massive({
   app.set("db", db);
   console.log("db connected");
 });
+
+app.use(express.static(`${__dirname}/../build`));
 
 app.get("/api/sign-s3", (req, res) => {
   aws.config = {
@@ -76,6 +79,10 @@ app.get("/api/archive/images/:planetid", planetCtrl.getPlanetImages);
 app.post("/api/upload/star", starCtrl.createStar)
 app.post("/api/upload/planet", planetCtrl.createPlanet);
 app.post("/api/upload/image", planetCtrl.uploadImage);
+
+app.get("/*", (req, res) => {
+  res.sendFile(path.join(__dirname, "../build/index.html"));
+});
 
 app.listen(SERVER_PORT, () => {
   console.log(`Server running on port ${SERVER_PORT}.`);
