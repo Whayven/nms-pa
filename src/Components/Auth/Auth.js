@@ -2,6 +2,31 @@ import React, { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { Redirect } from "react-router-dom";
 import { loginUser, registerUser } from "../../redux/userReducer";
+import styled from "styled-components";
+
+const Container = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  font-size: 20px;
+`;
+
+const Button = styled.button`
+  background: black;
+  border: 3px solid white;
+  border-radius: 3px;
+  color: white;
+  height: 30px;
+  font-weight:bold;
+  cursor: pointer;
+  margin-top: 5px;
+  :hover {
+    border-color: grey;
+    color: grey;
+  }
+`;
+
 
 const Auth = (props) => {
   const dispatch = useDispatch();
@@ -24,10 +49,10 @@ const Auth = (props) => {
   }
 
   return (
-    <div>
+    <Container>
       <h1>Planetary Archive</h1>
       <br />
-      <div>
+      <Container>
         <label>Username: </label>
         <input
           value={username}
@@ -45,10 +70,9 @@ const Auth = (props) => {
           }}
         />
         <br />
-        <br />
-        <button onClick={login}>Login</button> <button onClick={register}>Register</button>
-      </div>
-    </div>
+        <Button onClick={login}>Login</Button> <Button onClick={register}>Register</Button>
+      </Container>
+    </Container>
   );
 };
 

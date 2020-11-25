@@ -1,9 +1,41 @@
 import React, { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { requestUserStars } from "../../redux/starReducer";
+import styled from "styled-components";
 
 import UploadPlanet from "./UploadPlanet";
 import UploadStar from "./UploadStar";
+
+const Container = styled.div`
+  display: flex;
+  justify-content: space-evenly;
+  margin-top: 10px;
+  font-size: 18px;
+`;
+
+const Button = styled.button`
+  background: black;
+  border: 3px solid white;
+  border-radius: 3px;
+  color: white;
+  height: 30px;
+  font-weight:bold;
+  cursor: pointer;
+
+  a {
+    color: white;
+    text-decoration: none;
+  }
+
+  :hover {
+    border-color: grey;
+    color: grey;
+    a {
+      color: grey;
+    }
+  }
+`;
+
 
 const Upload = () => {
   const dispatch = useDispatch();
@@ -36,7 +68,7 @@ const Upload = () => {
     return (
       <div>
         <UploadStar />
-        <button onClick={resetToggles}>Cancel</button>
+        <Button onClick={resetToggles}>Cancel</Button>
       </div>
     )
   }
@@ -44,20 +76,20 @@ const Upload = () => {
     return (
       <div>
         <UploadPlanet />
-        <button onClick={resetToggles}>Cancel</button>
+        <Button onClick={resetToggles}>Cancel</Button>
       </div>
     )
   }
   else {
     return (
-      <div>
-        <button onClick={handlePlanetToggle}>
+      <Container>
+        <Button onClick={handlePlanetToggle}>
           Upload Planet
-        </button>
-        <button onClick={handleStarToggle}>
+        </Button>
+        <Button onClick={handleStarToggle}>
           Upload Star
-        </button>
-      </div>
+        </Button>
+      </Container>
     )
   }
 }

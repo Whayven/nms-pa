@@ -1,5 +1,39 @@
 import React, { useState } from "react";
 import axios from "axios";
+import styled from "styled-components";
+
+const Container = styled.div`
+display: flex;
+flex-direction: column;
+justify-content: center;
+align-items: center;
+margin-bottom: 10px;
+font-size: 18px;
+`;
+
+const CreateContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  width: 50%;
+  max-width: 400px;
+  margin: 0 auto;
+  padding: 15px 0;
+`;
+
+const Button = styled.button`
+  background: black;
+  border: 3px solid white;
+  border-radius: 3px;
+  color: white;
+  height: 30px;
+  font-weight:bold;
+  cursor: pointer;
+  margin-top: 5px;
+  :hover {
+    border-color: grey;
+    color: grey;
+  }
+`;
 
 const UploadStar = () => {
   const starTypeData = ["yellow", "red", "green", "blue"];
@@ -32,9 +66,9 @@ const UploadStar = () => {
   }
 
   return (
-    <div>
+    <Container>
       <h1>Upload Star</h1>
-      <div>
+      <CreateContainer>
         <label>Name: </label>
         <input value={name} type="text" onChange={(e) => {
           setName(e.target.value)
@@ -51,7 +85,6 @@ const UploadStar = () => {
         <input value={galaxy} type="text" onChange={(e) => {
           setGalaxy(e.target.value)
         }} />
-        <br/>
         <label>Economy: </label>
         <select value={economy} onChange={(e) => {
           setEconomy(e.target.value)
@@ -66,9 +99,9 @@ const UploadStar = () => {
           {conflictData.map(makeOption)}
         </select>
         {" "}
-        <button onClick={uploadNewStar}>Upload</button>
-      </div>
-    </div>
+        <Button onClick={uploadNewStar}>Upload</Button>
+      </CreateContainer>
+    </Container>
   )
 }
 

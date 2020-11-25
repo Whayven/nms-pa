@@ -1,6 +1,40 @@
 import React, { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
 import axios from "axios";
+import styled from "styled-components";
+
+const Container = styled.div`
+display: flex;
+flex-direction: column;
+justify-content: center;
+align-items: center;
+margin-bottom: 10px;
+font-size: 18px;
+`;
+
+const CreateContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  width: 50%;
+  max-width: 400px;
+  margin: 0 auto;
+  padding: 15px 0;
+`;
+
+const Button = styled.button`
+  background: black;
+  border: 3px solid white;
+  border-radius: 3px;
+  color: white;
+  height: 30px;
+  font-weight:bold;
+  cursor: pointer;
+  margin-top: 5px;
+  :hover {
+    border-color: grey;
+    color: grey;
+  }
+`;
 
 const UploadPlanet = () => {
   const userStars = useSelector(state => state.star.userStars)
@@ -39,9 +73,9 @@ const UploadPlanet = () => {
 
 
   return (
-    <div>
+    <Container>
       <h1>Upload Planet</h1>
-      <div>
+      <CreateContainer>
         <label>Name: </label>
         <input value={ptName} type="text" onChange={(e) => {
           setPtName(e.target.value);
@@ -58,7 +92,6 @@ const UploadPlanet = () => {
         }}>
           {hazardData.map(makeOption)}
         </select>
-        <br/>
         <label>Sentinels: </label>
         <select value={ptSentinels} onChange={(e) => {
           setPtSentinels(e.target.value);
@@ -73,9 +106,9 @@ const UploadPlanet = () => {
           {starData.map(makeStarOptions)}
         </select>
         {" "}
-        <button onClick={uploadNewPlanet}>Upload</button>
-      </div>
-    </div>
+        <Button onClick={uploadNewPlanet}>Upload</Button>
+      </CreateContainer>
+    </Container>
   )
 }
 

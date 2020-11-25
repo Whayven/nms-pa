@@ -4,9 +4,21 @@ import { withRouter, Link } from "react-router-dom";
 import styled from "styled-components";
 import { logoutUser } from "../../redux/userReducer";
 
+const Banner = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  h1 {
+    font-size: 50px;
+    background: black;
+    letter-spacing: 2px;
+  }
+`;
+
 const NavContainer = styled.nav`
   display: flex;
-  justify-content: space-between;
+  flex-direction: column;
   align-items: center;
   padding: 8px;
   background: rgb(0, 0, 0);
@@ -17,12 +29,13 @@ const NavLinksContainer = styled.div`
   display: flex;
   justify-content: space-evenly;
   align-content: center;
-  width: 30%;
+  width: 75%;
 `;
 
 const NavLink = styled(Link)`
   color: white;
   text-decoration: none;
+  font-size: 20px;
 `;
 
 const Nav = (props) => {
@@ -35,7 +48,9 @@ const Nav = (props) => {
   if (props.location.pathname !== "/") {
     return (
       <NavContainer>
-        <h2>Planetary Archive</h2>
+        <Banner>
+          <h1>Planetary Archive</h1>
+        </Banner>
         <NavLinksContainer>
           <NavLink to="/home">Home</NavLink>
           <NavLink to="/archive">Archive</NavLink>

@@ -6,7 +6,6 @@ import { v4 as randomString } from "uuid";
 
 const UploadImage = (props) => {
   const [isUploading, setIsUploading] = useState(false);
-  const [url, setUrl] = useState("");
 
   const getSignedRequest = ([file]) => {
     setIsUploading(true);
@@ -39,7 +38,6 @@ const UploadImage = (props) => {
       .put(signedRequest, file, options)
       .then((response) => {
         setIsUploading(false);
-        setUrl(url);
         // THEN DO SOMETHING WITH THE URL. SEND TO DB USING POST REQUEST OR SOMETHING
         axios.post("/api/upload/image", { url, planetid })
         .then(({ data }) => {
@@ -63,15 +61,17 @@ const UploadImage = (props) => {
         <div
           style={{
             position: "relative",
-            width: 160,
-            height: 80,
-            borderWidth: 5,
-            marginTop: 25,
-            borderColor: "black",
+            width: 340,
+            height: 180,
+            borderWidth: 3,
+            marginTop: 5,
+            padding: 10,
+            textAlign: "center",
+            borderColor: "white",
             borderStyle: "dashed",
             borderRadius: 5,
             display: "inline-block",
-            fontSize: 17,
+            fontSize: 20,
           }}
           {...getRootProps()}
         >
