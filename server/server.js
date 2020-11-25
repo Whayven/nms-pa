@@ -36,8 +36,10 @@ app.get("/api/archive", starCtrl.getStars)
 app.get("/api/archive/me", starCtrl.getUserStars);
 app.get("/api/archive/:starid", starCtrl.getStar);
 app.get("/api/archive/:starid/planets", starCtrl.getStarPlanets);
-
 app.get("/api/archive/planets/:planetid", planetCtrl.getPlanetInfo);
+
+app.post("/api/upload/star", starCtrl.createStar)
+app.post("/api/upload/planet", planetCtrl.createPlanet);
 
 app.listen(SERVER_PORT, () => {
   console.log(`Server running on port ${SERVER_PORT}.`);

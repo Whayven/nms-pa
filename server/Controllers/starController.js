@@ -34,4 +34,16 @@ module.exports = {
       .then((planets) => res.status(200).send(planets))
       .catch((err) => res.status(500).send(err));
   },
+  createStar: async (req, res) => {
+    const { userid } = req.session;
+    const { name, type, galaxy, economy, conflict, address } = req.body;
+    const db = req.app.get("db");
+
+    await db.stars
+      .create_star({ name, type, galaxy, economy, conflict, address, userid })
+      .then((_) => {
+        res.status(200).send("Star Upload.");
+      })
+      .catch((err) => res.status(500).send(err));
+  },
 };

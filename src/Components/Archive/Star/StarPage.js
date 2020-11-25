@@ -26,14 +26,13 @@ const StarPage = () => {
   if (name) {
     return (
       <div>
-        <h1>{name}</h1>
+        <h1>{titleCase(name)}</h1>
         <h2>
           {titleCase(star_type)} Star / 
           {titleCase(galaxy)} / 
           Tier {economy} Economy / 
           {titleCase(conflict)}
           </h2>
-        {console.log(starInfo)}
         <p>Discovered by {username}</p>
         <br />
         <PlanetList starid={starid} />

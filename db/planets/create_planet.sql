@@ -1,0 +1,1 @@
+insert into planet (name, type, hazard, sentinels, star_id, user_id) values (${ptName}, ${ptType}, ${ptHazard}, ${ptSentinels}, ${ptStar}, ${userid})

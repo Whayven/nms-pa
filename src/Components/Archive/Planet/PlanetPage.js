@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { useSelector } from "react-redux";
 import { Link, useParams } from "react-router-dom";
 import axios from "axios";
 
@@ -7,6 +8,7 @@ const titleCase = (str) => {
 };
 
 const Planet = () => {
+  const user = useSelector(state => state.user.user);
   const [planetInfo, setPlanetInfo] = useState({});
 
   let { planetid } = useParams();
@@ -26,6 +28,8 @@ const Planet = () => {
     username,
   } = planetInfo;
 
+  const ctrlPanel = username === user.username ? <button>Upload Picture</button> : <></>;
+
   if (name) {
     return (
       <div>
@@ -37,6 +41,8 @@ const Planet = () => {
         <button>
           <Link to={`/archive/${star_id}`}>Back to System</Link>
         </button>
+        {" "}
+        {ctrlPanel}
       </div>
     );
   } else {
