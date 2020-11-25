@@ -3,13 +3,16 @@ import { useSelector } from "react-redux";
 import { Link, useParams } from "react-router-dom";
 import axios from "axios";
 
+import UploadImage from "../../Upload/UploadImage";
+
 const titleCase = (str) => {
   return str.charAt(0).toUpperCase() + str.slice(1);
 };
 
 const Planet = () => {
-  const user = useSelector(state => state.user.user);
+  const user = useSelector((state) => state.user.user);
   const [planetInfo, setPlanetInfo] = useState({});
+  const [planetImages, setPlanetImages] = useState([]);
 
   let { planetid } = useParams();
 
@@ -19,16 +22,27 @@ const Planet = () => {
     });
   }, []);
 
-  const {
-    name,
-    type,
-    hazard,
-    sentinels,
-    star_id,
-    username,
-  } = planetInfo;
+  useEffect(() => {
+    axios.get(`/api/archive/images/${planetid}`).then(({ data }) => {
+      setPlanetImages(data);
+    });
+  }, []);
 
-  const ctrlPanel = username === user.username ? <button>Upload Picture</button> : <></>;
+  const { name, type, hazard, sentinels, star_id, username } = planetInfo;
+
+  const gallery = planetImages.map((planetImage, i) => {
+    return (
+      <img
+        key={planetImage.planet_image_id}
+        src={planetImage.planet_image_url}
+        alt={name + " planet"}
+        width="640"
+        height="360"
+      />
+    );
+  });
+  const ctrlPanel =
+    username === user.username ? <UploadImage planetid={planetInfo.planet_id} setImages={setPlanetImages} /> : <></>;
 
   if (name) {
     return (
@@ -40,9 +54,11 @@ const Planet = () => {
         <p>Discovered by {username}</p>
         <button>
           <Link to={`/archive/${star_id}`}>Back to System</Link>
-        </button>
-        {" "}
+        </button>{" "}
+        <br />
         {ctrlPanel}
+        {gallery}
+        
       </div>
     );
   } else {
